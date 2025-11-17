@@ -1,2 +1,181 @@
 @import "tailwindcss";
 
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 80px;
+    background-color: #000;
+    color: white;
+}
+
+.header__logo {
+    margin-right: 4rem;
+}
+
+.header__nav {
+    display: flex;
+    width: 995px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 200px;
+    font-size: 18px;
+}
+
+.header__nav a {
+    margin-right: 2rem;
+    text-decoration: none;
+    color: white;
+}
+
+.app__content {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 80px;
+    height: 1240px;
+    /* largeur fixe de la sidebar */
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.sidebar__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sidebar__icon {
+    border: none;
+    background: white;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar__text {
+    display: block;
+    transform: rotate(180deg);
+    color: white;
+    writing-mode: vertical-lr;
+    text-align: center;
+    margin-top: 300px;
+}
+
+.sidebar__icon svg {
+    color: #ff0101;
+    /* rouge SportSee par exemple */
+}
+
+.app__main {
+    flex: 1;
+    padding: 2rem 3rem;
+    background: #f7f7f7;
+}
+
+.user-info h1 span {
+    color: #ff0101;
+}
+
+.user-page__content {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.user-page__charts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.user-page__charts-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.activityChartContainer {
+    width: 835px;
+    height: 320px;
+    background-color: #FBFBFB;
+    border-radius: 16px;
+    padding: 16px;
+    margin-top: 100px;
+}
+
+.activityChartHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.activityList {
+    display: flex;
+    gap: 60px;
+}
+
+/* activityChart.module.css */
+.activityList li {
+    list-style: disc;
+    /* ou circle, square */
+    margin-bottom: 8px;
+    color: #000;
+    /* couleur du texte */
+}
+
+.activityList li:nth-child(1)::marker {
+    color: #282D30;
+    /* couleur de la puce pour le premier élément */
+    font-size: 25px;
+}
+
+.activityList li:nth-child(2)::marker {
+    color: #E60000;
+    /* couleur de la puce pour le deuxième élément */
+    font-size: 25px;
+}
+
+.customTooltip {
+    background-color: #e60000;
+    /* rouge */
+    color: white;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
