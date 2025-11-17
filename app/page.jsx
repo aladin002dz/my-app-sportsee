@@ -2,33 +2,36 @@
 
 import { useEffect, useState } from "react";
 import DailyActivityChart from "@/components/user/DailyActivityChart";
-import MainLayout from "@/components/layout/MainLayout";
 
 export default function HomePage() {
     const [firstName, setFirstName] = useState("");
+    const userId = 12; // à passer aux composants graphiques
 
     useEffect(() => {
-        // Exemple : récupérer les infos utilisateur depuis l'API
         async function fetchUser() {
-            const res = await fetch("http://localhost:3000/user/12");
-            const json = await res.json();
-            setFirstName(json.data.userInfos.firstName);
+            try {
+                const res = await fetch(`http://localhost:3000/user/${userId}`);
+                const json = await res.json();
+                setFirstName(json.data.userInfos.firstName);
+            } catch (error) {
+                console.error("Erreur lors du chargement de l'utilisateur :", error);
+            }
         }
         fetchUser();
     }, []);
 
-    const userId = 12; // à passer à tes composants graphiques
-
     return (
-        <MainLayout>
-            <h1>
-                Bonjour <span className='username'>{firstName}</span>
+        <div>
+            <h1 className="font-medium text-5xl pb-8">
+                Bonjour <span className='text-red-600'>{firstName}</span>
             </h1>
             <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 
-            {/* 👉 Ajout du graphique ici */}
-            <DailyActivityChart userId={userId} />
+            <section>
+                {/* 👉 Ajout du graphique ici */}
+                <DailyActivityChart userId={userId} />
+            </section>
+        </div>
 
-        </MainLayout>
     );
 }

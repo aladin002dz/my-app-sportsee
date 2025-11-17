@@ -1,15 +1,18 @@
-// src/app/layout.js
-import "./../styles/globals.css";
-
-export const metadata = {
-    title: "SportSee",
-    description: "Dashboard utilisateur SportSee",
-};
+// app/layout.jsx
+import Header from "@/components/layout/Header";
+import Sidebar from "@/components/layout/Sidebar";
+import "../styles/globals.css";
 
 export default function RootLayout({ children }) {
     return (
         <html lang="fr">
-            <body>{children}</body>
+            <body>
+                <Header />
+                <div className="flex">
+                    <Sidebar />
+                    <main className="p-20">{children}</main>
+                </div>
+            </body>
         </html>
     );
 }

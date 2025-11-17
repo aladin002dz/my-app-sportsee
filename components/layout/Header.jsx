@@ -5,11 +5,11 @@ import Link from "next/link";
 
 export default function Header() {
     return (
-        <header className="header">
+        <header className="flex bg-black p-4 justify-between content-center h-20">
             <div className="header__logo">
-                <Image src="/logo.png" alt="SportSee" width={120} height={40} />
+                <Image src="/logo.png" alt="SportSee" width={160} height={40} />
             </div>
-            <nav className="header__nav">
+            <nav className="flex text-white gap-60 pt-3 pr-20 text-xl">
                 <Link href="/">Accueil</Link>
                 <Link href="#">Profil</Link>
                 <Link href="#">Réglage</Link>
