@@ -1,23 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-export default function SessionDurationChart({ userId }) {
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        async function fetchSessionDuration() {
-            try {
-                const res = await fetch(`http://localhost:3000/user/${userId}/average-sessions`);
-                const json = await res.json();
-                setData(json.data.sessions);
-            } catch (error) {
-                console.error("Erreur lors du chargement des données :", error);
-            }
-        }
-        fetchSessionDuration()
-    }, [userId]);
+export default function SessionDurationChart({ sessions }) {
+    // ici, on ne fetch plus, on reçoit directement les données
+    const data = sessions || [];
 
     function CustomTooltip({ active, payload }) {
         if (active && payload && payload.length) {

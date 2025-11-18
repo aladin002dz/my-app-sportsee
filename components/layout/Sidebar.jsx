@@ -8,7 +8,7 @@ import { LuDumbbell } from "react-icons/lu";
 export default function Sidebar() {
     return (
         <aside className="w-20 h-300 flex flex-col content-center items-center bg-black">
-            <nav className="flex flex-col gap-6 pt-70">
+            <nav className="flex flex-col gap-6 pt-50">
                 <button className="bg-white cursor-pointer rounded-md p-3" id="sidebar__icon">
                     <GrYoga size={32} />
                 </button>
