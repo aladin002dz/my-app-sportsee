@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import DailyActivityChart from "@/components/user/DailyActivityChart";
+import SessionDurationChart from "@/components/user/SessionDurationChart";
 
 export default function HomePage() {
     const [firstName, setFirstName] = useState("");
@@ -30,6 +31,7 @@ export default function HomePage() {
             <section>
                 {/* 👉 Ajout du graphique ici */}
                 <DailyActivityChart userId={userId} />
+                <SessionDurationChart userId={userId} />
             </section>
         </div>
 
