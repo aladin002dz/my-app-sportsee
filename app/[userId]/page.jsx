@@ -1,6 +1,7 @@
 import DailyActivityChart from "@/components/user/DailyActivityChart";
 import SessionDurationChart from "@/components/user/SessionDurationChart";
 import PerformanceChart from "@/components/user/PerformanceChart";
+import ScoreChart from "@/components/user/ScoreChart";
 
 async function getUser(userId) {
     const res = await fetch(`http://localhost:3000/user/${userId}`);
@@ -74,8 +75,10 @@ export default async function DashboardPage({ params }) {
         );
     }
 
+    const userScore = userData.todayScore ?? userData.score ?? 0;
+
     return (
-        <main className="m-10 -mt-2">
+        <main className="m-5 -mt-2">
             <h1 className="text-5xl font-semibold pb-6">
                 Bonjour <span className="text-red-600">
                     {userData.userInfos?.firstName || "Sportif"}
@@ -89,6 +92,7 @@ export default async function DashboardPage({ params }) {
                 <div className="flex gap-7 mt-5">
                     <SessionDurationChart sessions={sessions} />
                     <PerformanceChart data={performanceData} />
+                    <ScoreChart score={userScore} />
                 </div>
             </section>
         </main>

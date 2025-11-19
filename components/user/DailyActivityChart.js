@@ -18,7 +18,7 @@ export default function DailyActivityChart({ sessions }) {
     }
 
     return (
-        <div className="w-190 h-90 bg-gray-50 rounded-2xl p-8 mt-20">
+        <div className="w-240 h-90 bg-gray-50 rounded-2xl p-8 mt-20">
             <div className="flex content-between items-center mb-2 gap-65 text-sm">
                 <h2 className="font-medium">Activité quotidienne</h2>
                 <ul className="activityList">
