@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function HomePage() {
     return (
-        <main className="flex flex-col justify-center items-center">
+        <main className="flex flex-col justify-center items-center m-10">
             <h1 className="text-5xl font-semibold mb-10 text-red-500">Bienvenue sur SportSee</h1>
             <p className="font-semibold">Choisissez un utilisateur :</p>
 

@@ -1,28 +1,14 @@
 "use client";
+//importer graphique Recharts
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
-import { useEffect, useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
-
-export default function ActivityChart({ userId }) {
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        async function fetchActivity() {
-            try {
-                const res = await fetch(`http://localhost:3000/user/${userId}/activity`);
-                const json = await res.json();
-                setData(json.data.sessions);
-            } catch (error) {
-                console.error("Erreur lors du chargement des données :", error);
-            }
-        }
-        fetchActivity();
-    }, [userId]);
+export default function DailyActivityChart({ sessions }) {
+    const data = sessions || [];
 
     function CustomTooltip({ payload, active }) {
         if (active && payload && payload.length) {
             return (
-                <div className="customTooltip">
+                <div className= "bg-[#e60000] text-white text-xs px-2 py-1">
                     <p>{payload[0].value} kg</p>
                     <p>{payload[1].value} kCal</p>
                 </div>
@@ -34,7 +20,7 @@ export default function ActivityChart({ userId }) {
     return (
         <div className="w-190 h-90 bg-gray-50 rounded-2xl p-8 mt-20">
             <div className="flex content-between items-center mb-2 gap-65 text-sm">
-                <h2>Activité quotidienne</h2>
+                <h2 className="font-medium">Activité quotidienne</h2>
                 <ul className="activityList">
                     <li>Poids (kg)</li>
                     <li>Calories brûlées (kCal)</li>
@@ -72,6 +58,7 @@ export default function ActivityChart({ userId }) {
                         fill="#282D30"
                         barSize={8}
                         radius={[3, 3, 0, 0]}
+                        stroke="none"
                     />
                     <Bar
                         yAxisId="cal"
@@ -79,6 +66,7 @@ export default function ActivityChart({ userId }) {
                         fill="#E60000"
                         barSize={8}
                         radius={[3, 3, 0, 0]}
+                        stroke="none"
                     />
                 </BarChart>
             </ResponsiveContainer>

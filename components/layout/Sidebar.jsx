@@ -7,26 +7,26 @@ import { LuDumbbell } from "react-icons/lu";
 
 export default function Sidebar() {
     return (
-        <aside className="w-20 h-300 flex flex-col content-center items-center bg-black">
-            <nav className="flex flex-col gap-6 pt-50">
+        <aside className="w-20 h-280 flex flex-col content-center items-center bg-black">
+            <nav className="flex flex-col gap-6 pt-70">
                 <button className="bg-white cursor-pointer rounded-md p-3" id="sidebar__icon">
-                    <GrYoga size={32} />
+                    <GrYoga className="size-8" />
                 </button>
 
                 <button className="bg-white cursor-pointer rounded-md p-3" id="sidebar__icon">
-                    <BiSwim size={32} />
+                    <BiSwim className="size-8" />
                 </button>
 
                 <button className="bg-white cursor-pointer rounded-md p-3" id="sidebar__icon">
-                    <MdOutlineDirectionsBike size={32} />
+                    <MdOutlineDirectionsBike className="size-8" />
                 </button>
 
                 <button className="bg-white cursor-pointer rounded-md p-3" id="sidebar__icon">
-                    <LuDumbbell size={32} />
+                    <LuDumbbell className="size-8" />
                 </button>
 
             </nav>
-            <p className="block text-white rotate-180 mt-70" id="sidebar__text">Copiryght, SportSee 2025</p>
+            <p className="block text-white rotate-180 mt-70 text-sm" id="sidebar__text">Copiryght, SportSee 2025</p>
         </aside>
     );
 }

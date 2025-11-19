@@ -1,8 +1,6 @@
-// app/[userId]/page.jsx
-// PAS de "use client" ici → Server Component
-
 import DailyActivityChart from "@/components/user/DailyActivityChart";
 import SessionDurationChart from "@/components/user/SessionDurationChart";
+import PerformanceChart from "@/components/user/PerformanceChart";
 
 async function getUser(userId) {
     const res = await fetch(`http://localhost:3000/user/${userId}`);
@@ -13,7 +11,7 @@ async function getUser(userId) {
     }
 
     const json = await res.json();
-    return json.data; // adapte si ton backend renvoie autre chose
+    return json.data;
 }
 
 async function getUserAverageSessions(userId) {
@@ -30,15 +28,46 @@ async function getUserAverageSessions(userId) {
     return json?.data?.sessions || [];
 }
 
+async function getUserActivity(userId) {
+    const res = await fetch(`http://localhost:3000/user/${userId}/activity`);
+
+    if (!res.ok) {
+        console.error("Erreur fetch activity", res.status);
+        return [];
+    }
+
+    const json = await res.json();
+    return json?.data?.sessions || [];
+}
+
+async function getUserPerformance(userId) {
+    const res = await fetch(`http://localhost:3000/user/${userId}/performance`, {
+        cache: "no-store", // pour éviter le cache en dev
+    });
+
+    if (!res.ok) {
+        console.error("Erreur fetch performance", res.status);
+        return [];
+    }
+
+    const json = await res.json();
+
+    // dans l’API classique SportSee, c’est json.data.data
+    // et json.data.kind contient la map des types
+    return json?.data?.data || [];
+}
+
 export default async function DashboardPage({ params }) {
-    const { userId } = await params;   // ✅ fix the Promise issue
+    const { userId } = await params;   
 
     const userData = await getUser(userId);
     const sessions = await getUserAverageSessions(userId);
+    const activitySessions = await getUserActivity(userId);
+    const performanceData = await getUserPerformance(userId);
 
     if (!userData) {
         return (
-            <main style={{ padding: "2rem" }}>
+            <main>
                 <h1>Utilisateur introuvable</h1>
                 <p>Vérifie l’URL (ex : /12 ou /18).</p>
             </main>
@@ -46,18 +75,21 @@ export default async function DashboardPage({ params }) {
     }
 
     return (
-        <main>
+        <main className="m-10 -mt-2">
             <h1 className="text-5xl font-semibold pb-6">
                 Bonjour <span className="text-red-600">
                     {userData.userInfos?.firstName || "Sportif"}
                 </span>
 
             </h1>
-            <p className="font-medium">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+            <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 
-            <section className="mt-2 grid gap-1.5">
-                <DailyActivityChart userId={userId} />
-                <SessionDurationChart sessions={sessions} />
+            <section>
+                <DailyActivityChart sessions={activitySessions} />
+                <div className="flex gap-7 mt-5">
+                    <SessionDurationChart sessions={sessions} />
+                    <PerformanceChart data={performanceData} />
+                </div>
             </section>
         </main>
     );

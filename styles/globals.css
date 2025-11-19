@@ -44,14 +44,6 @@ body {
     font-size: 25px;
 }
 
-.customTooltip {
-    background-color: #e60000;
-    /* rouge */
-    color: white;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
-}
 
 .session-chart-container {
     background: #ff0000;
