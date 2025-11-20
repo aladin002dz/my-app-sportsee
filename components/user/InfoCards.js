@@ -1,7 +1,9 @@
 "use client";
 
+// Composant pour une seule carte d'information
 function InfoCard({ icon, label, value, unit, bgIcon }) {
     return (
+        // Conteneur principal de la carte
         <div className="flex items-center bg-gray-50 rounded-2xl p-4 w-64 h-24 shadow-sm">
             <div className={`flex items-center justify-center rounded-lg w-12 h-12 mr-4 ${bgIcon}`}>
                 {icon}
@@ -17,9 +19,20 @@ function InfoCard({ icon, label, value, unit, bgIcon }) {
     );
 }
 
+/**
+ * Composant affichant les informations clés de l'utilisateur (calories, protéines, etc.).
+ *
+ * @param props - Props du composant
+ * @param props.keyData - Objet contenant les données clés de l'utilisateur
+ * @returns Composant JSX des cartes d'information
+ *
+ * @example
+ * <InfoCards keyData={userData.keyData} />
+ */
 export default function InfoCards({ keyData }) {
-    if (!keyData) return null;
+    if (!keyData) return null; // Rend null si les données ne sont pas disponibles
 
+    // Destructuration des données clés
     const {
         calorieCount,
         proteinCount,
@@ -28,6 +41,7 @@ export default function InfoCards({ keyData }) {
     } = keyData;
 
     return (
+        // Conteneur principal affichant les cartes en colonne avec espacement
         <div className="flex flex-col gap-4">
             <InfoCard
                 label="Calories"

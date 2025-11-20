@@ -2,6 +2,7 @@
 
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from "recharts";
 
+// Mapping des types de performance avec leurs labels lisibles
 const kindLabels = {
     1: "Cardio",
     2: "Énergie",
@@ -11,27 +12,49 @@ const kindLabels = {
     6: "Intensité",
 };
 
+/**
+ * Composant affichant les performances de l'utilisateur sur différents axes.
+ *
+ * @param props - Props du composant
+ * @param props.data - Données de performance (tableau)
+ * @returns Composant JSX du graphique de performance
+ *
+ * @example
+ * <PerformanceChart data={performanceData} />
+ */
 export default function PerformanceChart({ data }) {
-    // on transforme les données pour avoir des labels lisibles
+
+    // Transformation des données pour ajouter des labels lisibles pour chaque type
     const formattedData = (data || []).map((item) => ({
         ...item,
-        kindLabel: kindLabels[item.kind] || item.kind,
+        kindLabel: kindLabels[item.kind] || item.kind, // utilise le label correspondant ou la valeur brute
     }));
 
     return (
+        // Conteneur principal avec fond gris foncé et coins arrondis
         <div className="bg-[#282D30] rounded-2xl p-4 w-[250px] h-[250px] mx-auto">
+
+            {/* Conteneur responsive pour adapter le graphique à la taille du parent */}
             <ResponsiveContainer width="100%" height="100%">
+
+                {/* RadarChart affichant les performances */}
                 <RadarChart
                     cx="50%"
                     cy="50%"
                     outerRadius="65%"
                     data={formattedData}
                 >
+
+                    {/* Grille du radar sans lignes radiales */}
                     <PolarGrid radialLines={false} />
+
+                    {/* Axe polaire avec labels pour chaque performance */}
                     <PolarAngleAxis
                         dataKey="kindLabel"
                         tick={{ fill: "#FFFFFF", fontSize: 12 }}
                     />
+
+                    {/* Radar représentant les valeurs de performance */}
                     <Radar
                         name="Performance"
                         dataKey="value"
