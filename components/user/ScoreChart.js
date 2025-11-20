@@ -15,16 +15,16 @@ export default function ScoreChart({ score }) {
     ];
 
     return (
-        <div className="bg-gray-50 rounded-2xl w-75 h-75 relative">
-            <h2 className="text-sm font-medium ml-6 mt-6">Score</h2>
+        <div className="bg-gray-50 rounded-2xl w-[250px] h-[250px] aspect-square mx-auto relative p-4">
+            <h2 className="text-sm font-medium mb-2">Score</h2>
 
-            <ResponsiveContainer width={300} height={210}>
+            <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
-                    innerRadius="80%"    // anneau plus large
-                    outerRadius="110%"   // anneau plus grand
+                    innerRadius="50%"       // rayon intérieur proportionnel
+                    outerRadius="100%"      // rayon externe = taille du conteneur
                     data={data}
-                    startAngle={90}
-                    endAngle={500}
+                    startAngle={90}         // commence en haut
+                    endAngle={-270}         // sens horaire
                 >
                     <PolarAngleAxis
                         type="number"
@@ -33,28 +33,28 @@ export default function ScoreChart({ score }) {
                         tick={false}
                     />
 
-                    {/* fond de l’anneau */}
+                    {/* Fond de l’anneau */}
                     <RadialBar
                         data={[{ value: 100 }]}
                         dataKey="value"
-                        cornerRadius={10}
+                        cornerRadius="50%"
                         fill="#FBFBFB"
                     />
 
-                    {/* barre de score */}
+                    {/* Barre de score */}
                     <RadialBar
                         dataKey="value"
-                        cornerRadius={10}
+                        cornerRadius="50%"
                         fill="#E60000"
                     />
                 </RadialBarChart>
             </ResponsiveContainer>
 
-            {/* disque blanc central plus grand */}
+            {/* Disque blanc central */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="bg-white rounded-full w-40 h-40 flex flex-col items-center justify-center">
+                <div className="bg-white rounded-full w-1/2 h-1/2 flex flex-col items-center justify-center">
                     <p className="text-2xl font-bold">{normalizedScore}%</p>
-                    <p className="text-sm text-gray-500 text-center mt-2 font-semibold">
+                    <p className="text-xs md:text-sm text-gray-500 mt-1 font-semibold">
                         de votre<br />objectif
                     </p>
                 </div>

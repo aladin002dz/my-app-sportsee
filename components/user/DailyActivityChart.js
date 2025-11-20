@@ -18,8 +18,8 @@ export default function DailyActivityChart({ sessions }) {
     }
 
     return (
-        <div className="w-240 h-90 bg-gray-50 rounded-2xl p-8 mt-20">
-            <div className="flex content-between items-center mb-2 gap-65 text-sm">
+        <div className="w-full max-w-[800px] h-[360px] bg-gray-50 rounded-2xl p-8 mt-10">
+            <div className="flex justify-between items-center mb-2 gap-16 text-sm">
                 <h2 className="font-medium">Activité quotidienne</h2>
                 <ul className="activityList">
                     <li>Poids (kg)</li>

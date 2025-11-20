@@ -41,9 +41,9 @@ export default function SessionDurationChart({ sessions }) {
     }
 
     return (
-        <div className="bg-red-500 text-sm rounded-2xl w-75 h-75 relative">
-            <h2 className="text-gray-300 text-sm ml-8 mt-5 w-30">Durée moyenne des sessions</h2>
-            <ResponsiveContainer width="300" height="250">
+        <div className="bg-[#FF0000] bg-opacity-80 rounded-2xl w-[250px] h-[250px] relative">
+            <h2 className="text-gray-300 text-xs mb-4 mt-5 ml-4 w-[120px]">Durée moyenne des sessions</h2>
+            <ResponsiveContainer width="100%" height="80%">
                 <LineChart
                     data={extendedData}
                     margin={{ top: 20, right: 0, left: 0, bottom: 30 }}

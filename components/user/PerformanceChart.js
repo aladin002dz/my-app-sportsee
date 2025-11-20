@@ -19,8 +19,8 @@ export default function PerformanceChart({ data }) {
     }));
 
     return (
-        <div className="bg-[#282D30] rounded-2xl p-4 w-75">
-            <ResponsiveContainer width={258} height={260}>
+        <div className="bg-[#282D30] rounded-2xl p-4 w-[250px] h-[250px] mx-auto">
+            <ResponsiveContainer width="100%" height="100%">
                 <RadarChart
                     cx="50%"
                     cy="50%"
