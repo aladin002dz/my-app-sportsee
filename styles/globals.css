@@ -18,10 +18,6 @@ body {
     text-align: center;
 }
 
-.activityList {
-    display: flex;
-    gap: 60px;
-}
 
 /* activityChart.module.css */
 .activityList li {

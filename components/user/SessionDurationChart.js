@@ -3,7 +3,7 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function SessionDurationChart({ sessions }) {
-    const data = sessions || [];
+    const data = Array.isArray(sessions) ? sessions : [];
 
     // Ajouter points fictifs aux extrémités pour que la courbe touche les bords
     const extendedData = [

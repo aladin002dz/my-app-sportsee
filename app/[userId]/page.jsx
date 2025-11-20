@@ -2,6 +2,7 @@ import DailyActivityChart from "@/components/user/DailyActivityChart";
 import SessionDurationChart from "@/components/user/SessionDurationChart";
 import PerformanceChart from "@/components/user/PerformanceChart";
 import ScoreChart from "@/components/user/ScoreChart";
+import InfoCards from "@/components/user/InfoCards";
 
 async function getUser(userId) {
     const res = await fetch(`http://localhost:3000/user/${userId}`);
@@ -87,12 +88,21 @@ export default async function DashboardPage({ params }) {
             </h1>
             <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 
-            <section>
-                <DailyActivityChart sessions={activitySessions} />
-                <div className="flex gap-7 mt-5">
-                    <SessionDurationChart sessions={sessions} />
-                    <PerformanceChart data={performanceData} />
-                    <ScoreChart score={userScore} />
+            {/* Layout 2 colonnes : graphes + cards info */}
+            <section className="mt-8 grid grid-cols-[3fr,1fr] gap-8">
+                {/* Colonne gauche : graphiques */}
+                <div>
+                    <DailyActivityChart sessions={activitySessions} />
+                    <div className="flex gap-7 mt-5">
+                        <SessionDurationChart sessions={sessions} />
+                        <PerformanceChart data={performanceData} />
+                        <ScoreChart score={userData.todayScore ?? userData.score ?? 0} />
+                    </div>
+                </div>
+
+                {/* Colonne droite : cards info */}
+                <div className="flex flex-col justify-between">
+                    <InfoCards keyData={userData.keyData} />
                 </div>
             </section>
         </main>
