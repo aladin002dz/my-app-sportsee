@@ -3,61 +3,7 @@ import SessionDurationChart from "@/components/user/SessionDurationChart";
 import PerformanceChart from "@/components/user/PerformanceChart";
 import ScoreChart from "@/components/user/ScoreChart";
 import InfoCards from "@/components/user/InfoCards";
-
-async function getUser(userId) {
-    const res = await fetch(`http://localhost:3000/user/${userId}`);
-
-    if (!res.ok) {
-        console.error("Erreur fetch user", res.status);
-        return null;
-    }
-
-    const json = await res.json();
-    return json.data;
-}
-
-async function getUserAverageSessions(userId) {
-    const res = await fetch(`http://localhost:3000/user/${userId}/average-sessions`);
-
-    if (!res.ok) {
-        console.error("Erreur fetch average-sessions", res.status);
-        return [];
-    }
-
-    const json = await res.json();
-    console.log("average-sessions json :", json);
-
-    return json?.data?.sessions || [];
-}
-
-async function getUserActivity(userId) {
-    const res = await fetch(`http://localhost:3000/user/${userId}/activity`);
-
-    if (!res.ok) {
-        console.error("Erreur fetch activity", res.status);
-        return [];
-    }
-
-    const json = await res.json();
-    return json?.data?.sessions || [];
-}
-
-async function getUserPerformance(userId) {
-    const res = await fetch(`http://localhost:3000/user/${userId}/performance`, {
-        cache: "no-store", // pour éviter le cache en dev
-    });
-
-    if (!res.ok) {
-        console.error("Erreur fetch performance", res.status);
-        return [];
-    }
-
-    const json = await res.json();
-
-    // dans l’API classique SportSee, c’est json.data.data
-    // et json.data.kind contient la map des types
-    return json?.data?.data || [];
-}
+import { getUser, getUserAverageSessions, getUserActivity, getUserPerformance } from "@/actions/api";
 
 export default async function DashboardPage({ params }) {
     const { userId } = await params;   
