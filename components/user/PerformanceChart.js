@@ -15,9 +15,10 @@ const kindLabels = {
 /**
  * Composant affichant les performances de l'utilisateur sur différents axes.
  *
- * @param props - Props du composant
- * @param props.data - Données de performance (tableau)
- * @returns Composant JSX du graphique de performance
+ * @module PerformanceChart
+ * @param {Object} props - Props du composant
+ * @param {Array<{value: number, kind: number}>} props.data - Données de performance (tableau)
+ * @returns {JSX.Element} Composant JSX du graphique de performance
  *
  * @example
  * <PerformanceChart data={performanceData} />

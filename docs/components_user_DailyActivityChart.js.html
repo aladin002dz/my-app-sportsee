@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/user/DailyActivityChart.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/user/DailyActivityChart.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use client";
+//importer graphique Recharts
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+
+/**
+ * Composant affichant l'activité quotidienne de l'utilisateur sous forme de graphique.
+ *
+ * @module DailyActivityChart
+ * @param {Object} props - Props du composant
+ * @param {Array&lt;{day: string, kilogram: number, calories: number}>} props.sessions - Tableau des sessions d'activité quotidienne
+ * @returns {JSX.Element} Composant JSX du graphique d'activité
+ *
+ * @example
+ * &lt;DailyActivityChart sessions={activitySessions} />
+ */
+export default function DailyActivityChart({ sessions }) {
+    // S'assure que sessions est un tableau valide
+    const data = sessions || [];
+
+    /**
+ * Tooltip personnalisé pour le graphique
+ * @param payload - Données de la barre survolée
+ * @param active - Booléen indiquant si le tooltip doit être affiché
+ */
+    function CustomTooltip({ payload, active }) {
+        if (active &amp;&amp; payload &amp;&amp; payload.length) {
+            return (
+                &lt;div className="bg-[#e60000] text-white text-xs px-2 py-1">
+                    &lt;p>{payload[0].value} kg&lt;/p>
+                    &lt;p>{payload[1].value} kCal&lt;/p>
+                &lt;/div>
+            );
+        }
+        return null; // Ne rien afficher si le tooltip n'est pas actif
+    }
+
+    return (
+        // Conteneur principal du graphique avec style Tailwind
+        &lt;div className="w-full max-w-[800px] h-[360px] bg-gray-50 rounded-2xl p-8 mt-10">
+            &lt;div className="flex justify-between items-center mb-2 gap-16 text-sm">
+                &lt;h2 className="font-medium">Activité quotidienne&lt;/h2>
+                &lt;ul className="activityList">
+                    &lt;li>Poids (kg)&lt;/li>
+                    &lt;li>Calories brûlées (kCal)&lt;/li>
+                &lt;/ul>
+
+                {/* Composant Legend de Recharts */}
+                &lt;Legend
+                    verticalAlign="top"
+                    align="right"
+                    wrapperStyle={{ top: -10 }}
+                    payload={[
+                        { value: "Poids (kg)", type: "circle", color: "#282D30" },
+                        { value: "Calories brûlées (kCal)", type: "circle", color: "#E60000" },
+                    ]}
+                />
+            &lt;/div>
+
+            {/* Conteneur responsive pour que le graphique s'adapte */}
+            &lt;ResponsiveContainer width="100%" height={250}>
+                &lt;BarChart data={data} margin={{ top: 50, right: 20, left: 20 }}>
+
+                    {/* Grille horizontale uniquement (vertical=false) */}
+                    &lt;CartesianGrid strokeDasharray="3 3" vertical={false} yAxisId="cal" />
+
+                    {/* Axe des abscisses (jours) */}
+                    &lt;XAxis dataKey="day" tickFormatter={(d, i) => i + 1} />
+
+                    {/* Axe des ordonnées pour le poids */}
+                    &lt;YAxis
+                        yAxisId="kg"
+                        orientation="right"
+                        dataKey="kilogram"
+                        axisLine={false}
+                        tickLine={false}
+                    />
+                    {/* Axe des ordonnées pour les calories (caché) */}
+                    &lt;YAxis yAxisId="cal" hide dataKey="calories" />
+
+                    {/* Tooltip personnalisé */}
+                    &lt;Tooltip content={&lt;CustomTooltip />} />
+
+                    {/* Barre représentant le poids */}
+                    &lt;Bar
+                        yAxisId="kg"
+                        dataKey="kilogram"
+                        fill="#282D30"
+                        barSize={8}
+                        radius={[3, 3, 0, 0]}
+                        stroke="none"
+                    />
+
+                    {/* Barre représentant les calories */}
+                    &lt;Bar
+                        yAxisId="cal"
+                        dataKey="calories"
+                        fill="#E60000"
+                        barSize={8}
+                        radius={[3, 3, 0, 0]}
+                        stroke="none"
+                    />
+                &lt;/BarChart>
+            &lt;/ResponsiveContainer>
+        &lt;/div>
+    );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Components</h3><ul><li><a href="module-DailyActivityChart.html">DailyActivityChart</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-InfoCards.html">InfoCards</a></li><li><a href="module-PerformanceChart.html">PerformanceChart</a></li><li><a href="module-ScoreChart.html">ScoreChart</a></li><li><a href="module-SessionDurationChart.html">SessionDurationChart</a></li><li><a href="module-Sidebar.html">Sidebar</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSessions">getUserAverageSessions</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Fri Nov 21 2025 10:03:21 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -5,9 +5,10 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 /**
  * Composant affichant l'activité quotidienne de l'utilisateur sous forme de graphique.
  *
- * @param props - Props du composant
- * @param props.sessions - Tableau des sessions d'activité quotidienne
- * @returns Composant JSX du graphique d'activité
+ * @module DailyActivityChart
+ * @param {Object} props - Props du composant
+ * @param {Array<{day: string, kilogram: number, calories: number}>} props.sessions - Tableau des sessions d'activité quotidienne
+ * @returns {JSX.Element} Composant JSX du graphique d'activité
  *
  * @example
  * <DailyActivityChart sessions={activitySessions} />
@@ -64,7 +65,7 @@ export default function DailyActivityChart({ sessions }) {
 
                     {/* Axe des abscisses (jours) */}
                     <XAxis dataKey="day" tickFormatter={(d, i) => i + 1} />
-                    
+
                     {/* Axe des ordonnées pour le poids */}
                     <YAxis
                         yAxisId="kg"
