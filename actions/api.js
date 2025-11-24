@@ -3,29 +3,26 @@ const BASE_URL = "http://localhost:3000/user";
 
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE, } from "@/src/mocks/userData";
 
-// helpers mock
+// helpers génériques
+const findById = (list, key, userId) =>
+    list.find((item) => item[key] == userId);
+
 function getMockUser(userId) {
-    return USER_MAIN_DATA.find((u) => String(u.id) === String(userId)) || null;
+    return findById(USER_MAIN_DATA, "id", userId) || null;
 }
 
 function getMockUserActivity(userId) {
-    const entry =
-        USER_ACTIVITY.find((u) => String(u.userId) === String(userId)) || {};
-    return entry.sessions || [];
+    return findById(USER_ACTIVITY, "userId", userId)?.sessions || [];
 }
 
 function getMockUserAverageSessions(userId) {
-    const entry =
-        USER_AVERAGE_SESSIONS.find((u) => String(u.userId) === String(userId)) ||
-        {};
-    return entry.sessions || [];
+    return (
+        findById(USER_AVERAGE_SESSIONS, "userId", userId)?.sessions || []
+    );
 }
 
 function getMockUserPerformance(userId) {
-    const entry =
-        USER_PERFORMANCE.find((u) => String(u.userId) === String(userId)) || {};
-    // tu peux renvoyer `entry.data` ou la structure complète selon ce que ton <PerformanceChart /> attend
-    return entry.data || [];
+    return findById(USER_PERFORMANCE, "userId", userId)?.data || [];
 }
 
 /**
