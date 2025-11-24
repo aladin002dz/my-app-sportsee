@@ -3,6 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * Composant Header de l'application.
+ * Affiche le logo et la navigation principale.
+ * @module Header
+ * @returns {JSX.Element} Le composant Header.
+ */
 export default function Header() {
     return (
         <header className="flex bg-black p-4 justify-between content-center h-20">
