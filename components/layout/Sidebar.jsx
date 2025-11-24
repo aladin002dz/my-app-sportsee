@@ -5,6 +5,12 @@ import { GrYoga } from "react-icons/gr"
 import { BiSwim } from "react-icons/bi";
 import { LuDumbbell } from "react-icons/lu";
 
+/**
+ * Composant Sidebar de l'application.
+ * Affiche la navigation latérale avec des icônes de sport.
+ * @module Sidebar
+ * @returns {JSX.Element} Le composant Sidebar.
+ */
 export default function Sidebar() {
     return (
         <aside className="w-20 h-280 flex flex-col content-center items-center bg-black">

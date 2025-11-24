@@ -2,9 +2,9 @@
 const BASE_URL = "http://localhost:3000/user";
 
 /**
- * Récupère les informations d'un utilisateur
- * @param {*} userId - L'ID de l'utilisateur
- * @returns Les données utilisateur ou null si erreur
+ * Récupère les informations d'un utilisateur via son ID.
+ * @param {string|number} userId - L'identifiant unique de l'utilisateur.
+ * @returns {Promise<Object|null>} Une promesse qui résout avec les données utilisateur ou null en cas d'erreur.
  */
 export async function getUser(userId) {
     const res = await fetch(`${BASE_URL}/${userId}`);
@@ -19,9 +19,9 @@ export async function getUser(userId) {
 }
 
 /**
- *  Récupère les sessions moyennes d'un utilisateur
- * @param {*} userId - L'ID de l'utilisateur
- * @returns Tableau des sessions moyennes ou tableau vide si erreur
+ * Récupère la durée moyenne des sessions d'un utilisateur.
+ * @param {string|number} userId - L'identifiant unique de l'utilisateur.
+ * @returns {Promise<Array<Object>>} Une promesse qui résout avec un tableau des sessions moyennes ou un tableau vide en cas d'erreur.
  */
 export async function getUserAverageSessions(userId) {
     const res = await fetch(`${BASE_URL}/${userId}/average-sessions`);
@@ -38,9 +38,9 @@ export async function getUserAverageSessions(userId) {
 }
 
 /**
- * Récupère l'activité quotidienne d'un utilisateur
- * @param {*} userId - L'ID de l'utilisateur
- * @returns Tableau des sessions d'activité ou tableau vide si erreur
+ * Récupère l'activité quotidienne d'un utilisateur (poids, calories).
+ * @param {string|number} userId - L'identifiant unique de l'utilisateur.
+ * @returns {Promise<Array<Object>>} Une promesse qui résout avec un tableau des sessions d'activité ou un tableau vide en cas d'erreur.
  */
 export async function getUserActivity(userId) {
     const res = await fetch(`${BASE_URL}/${userId}/activity`);
@@ -55,9 +55,9 @@ export async function getUserActivity(userId) {
 }
 
 /**
- * Récupère les performances d'un utilisateur
- * @param {*} userId - L'ID de l'utilisateur
- * @returns Tableau des performances ou tableau vide si erreur
+ * Récupère les performances d'un utilisateur (énergie, endurance, etc.).
+ * @param {string|number} userId - L'identifiant unique de l'utilisateur.
+ * @returns {Promise<Object|Array>} Une promesse qui résout avec les données de performance ou un tableau vide en cas d'erreur.
  */
 export async function getUserPerformance(userId) {
     const res = await fetch(`${BASE_URL}/${userId}/performance`, {

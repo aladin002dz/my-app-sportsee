@@ -22,9 +22,14 @@ function InfoCard({ icon, label, value, unit, bgIcon }) {
 /**
  * Composant affichant les informations clés de l'utilisateur (calories, protéines, etc.).
  *
- * @param props - Props du composant
- * @param props.keyData - Objet contenant les données clés de l'utilisateur
- * @returns Composant JSX des cartes d'information
+ * @module InfoCards
+ * @param {Object} props - Props du composant
+ * @param {Object} props.keyData - Objet contenant les données clés de l'utilisateur
+ * @param {number} props.keyData.calorieCount - Nombre de calories
+ * @param {number} props.keyData.proteinCount - Quantité de protéines
+ * @param {number} props.keyData.carbohydrateCount - Quantité de glucides
+ * @param {number} props.keyData.lipidCount - Quantité de lipides
+ * @returns {JSX.Element|null} Composant JSX des cartes d'information ou null si pas de données
  *
  * @example
  * <InfoCards keyData={userData.keyData} />

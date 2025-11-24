@@ -5,9 +5,10 @@ import { RadialBarChart, RadialBar, PolarAngleAxis, ResponsiveContainer } from "
 /**
  * Composant affichant le score de l'utilisateur sous forme de graphique circulaire.
  *
- * @param props - Props du composant
- * @param props.score - Score de l'utilisateur (0 à 1 ou 0 à 100)
- * @returns Composant JSX du graphique de score
+ * @module ScoreChart
+ * @param {Object} props - Props du composant
+ * @param {number} props.score - Score de l'utilisateur (0 à 1 ou 0 à 100)
+ * @returns {JSX.Element} Composant JSX du graphique de score
  *
  * @example
  * <ScoreChart score={userScore} />

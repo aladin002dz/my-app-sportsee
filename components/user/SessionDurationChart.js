@@ -5,9 +5,10 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "rec
 /**
  * Composant affichant la durée moyenne des sessions de l'utilisateur.
  *
- * @param props - Props du composant
- * @param props.sessions - Tableau des sessions moyennes
- * @returns Composant JSX du graphique de durée des sessions
+ * @module SessionDurationChart
+ * @param {Object} props - Props du composant
+ * @param {Array<{day: number, sessionLength: number}>} props.sessions - Tableau des sessions moyennes
+ * @returns {JSX.Element} Composant JSX du graphique de durée des sessions
  *
  * @example
  * <SessionDurationChart sessions={sessions} />
@@ -64,7 +65,7 @@ export default function SessionDurationChart({ sessions }) {
         // Conteneur principal avec fond rouge semi-transparent et coins arrondis
         <div className="bg-[#FF0000] bg-opacity-80 rounded-2xl w-[250px] h-[250px] relative">
             <h2 className="text-gray-300 text-xs mb-4 mt-5 ml-4 w-[120px]">Durée moyenne des sessions</h2>
-            
+
             {/* Conteneur responsive pour que le graphique s'adapte */}
             <ResponsiveContainer width="100%" height="80%">
                 <LineChart
