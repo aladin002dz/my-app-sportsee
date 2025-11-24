@@ -42,7 +42,7 @@ export default function InfoCards({ keyData }) {
 
     return (
         // Conteneur principal affichant les cartes en colonne avec espacement
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-64">
             <InfoCard
                 label="Calories"
                 value={calorieCount}

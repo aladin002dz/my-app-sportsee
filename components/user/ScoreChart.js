@@ -34,11 +34,11 @@ export default function ScoreChart({ score }) {
             {/* Conteneur responsive qui ajuste le graphique à la taille du parent */}
             <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
-                    innerRadius="50%"       // rayon intérieur proportionnel
-                    outerRadius="100%"      // rayon externe = taille du conteneur
+                    innerRadius="80%"       // rayon intérieur proportionnel
+                    outerRadius="110%"      // rayon externe = taille du conteneur
                     data={data}
                     startAngle={90}         // commence en haut
-                    endAngle={-270}         // sens horaire
+                    endAngle={280}         // sens horaire
                 >
                     {/* Axe polaire pour les valeurs, ici invisible (tick=false) */}
                     <PolarAngleAxis
