@@ -43,7 +43,7 @@ export default async function DashboardPage({ params }) {
     const userScore = userData.todayScore ?? userData.score ?? 0;
 
     return (
-        <main className="m-5 -mt-2 max-w-6xl mx-auto">
+        <main className=" ml-7 mt-2 max-w-6xl mx-auto">
             {/* Header : Bonjour {Prénom} */}
             <h1 className="text-5xl font-semibold pb-6">
                 Bonjour <span className="text-red-600">
@@ -54,13 +54,13 @@ export default async function DashboardPage({ params }) {
             <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 
             {/* Layout 2 colonnes : graphes + cards info */}
-            <section className="mt-8 gap-6 flex">
+            <section className="mt-20 flex">
                 {/* Colonne gauche : graphiques */}
-                <div className="flex-1 flex flex-col gap-5">
+                <div className="flex-1 flex flex-col">
                     {/* Graphique activité quotidienne */}
                     <DailyActivityChart sessions={activitySessions} />
 
-                    <div className="flex flex-wrap gap-7">
+                    <div className="flex flex-wrap gap-5 mt-8">
 
                         {/* Graphique durée des sessions */}
                         <SessionDurationChart sessions={sessions} />
@@ -74,7 +74,7 @@ export default async function DashboardPage({ params }) {
                 </div>
 
                 {/* Colonne droite : cards */}
-                <aside className="w-64 mt-5">
+                <aside>
                     <InfoCards keyData={userData.keyData} />
                 </aside>
             </section>

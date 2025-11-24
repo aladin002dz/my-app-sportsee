@@ -36,10 +36,10 @@ export default function DailyActivityChart({ sessions }) {
 
     return (
         // Conteneur principal du graphique avec style Tailwind
-        <div className="w-full h-[360px] bg-gray-50 rounded-2xl p-8 mt-10">
-            <div className="flex justify-between items-center mb-2 gap-16 text-sm">
+        <div className="w-full h-[330px] bg-gray-50 rounded-2xl p-7">
+            <div className="flex justify-between items-center text-sm">
                 <h2 className="font-medium">Activité quotidienne</h2>
-                <ul className="activityList">
+                <ul className="activityList flex space-x-4 gap-8">
                     <li>Poids (kg)</li>
                     <li>Calories brûlées (kCal)</li>
                 </ul>
@@ -57,14 +57,22 @@ export default function DailyActivityChart({ sessions }) {
             </div>
 
             {/* Conteneur responsive pour que le graphique s'adapte */}
-            <ResponsiveContainer width="100%" height={250}>
-                <BarChart data={data} margin={{ top: 50, right: 20, left: 20 }}>
+            <ResponsiveContainer width="100%" height={230}>
+                <BarChart
+                    data={data}
+                    margin={{ top: 40, right: 0, left: 0, bottom: 0 }}
+                >
 
                     {/* Grille horizontale uniquement (vertical=false) */}
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} yAxisId="cal" />
+                    <CartesianGrid strokeDasharray="1 1" vertical={false} yAxisId="cal" />
 
                     {/* Axe des abscisses (jours) */}
-                    <XAxis dataKey="day" tickFormatter={(d, i) => i + 1} />
+                    <XAxis
+                        dataKey="day"
+                        tickFormatter={(d, i) => i + 1}
+                        tickLine={false}
+                        tick={{ dy: 10 }} // décale les ticks vers la gauche
+                    />
 
                     {/* Axe des ordonnées pour le poids */}
                     <YAxis
@@ -73,9 +81,12 @@ export default function DailyActivityChart({ sessions }) {
                         dataKey="kilogram"
                         axisLine={false}
                         tickLine={false}
+                        tick={{ dx: 20 }} // décale les ticks vers la droite
+                        
                     />
                     {/* Axe des ordonnées pour les calories (caché) */}
-                    <YAxis yAxisId="cal" hide dataKey="calories" />
+                    <YAxis yAxisId="cal" hide dataKey="calories"
+                    />
 
                     {/* Tooltip personnalisé */}
                     <Tooltip content={<CustomTooltip />} />
@@ -87,7 +98,6 @@ export default function DailyActivityChart({ sessions }) {
                         fill="#282D30"
                         barSize={8}
                         radius={[3, 3, 0, 0]}
-                        stroke="none"
                     />
 
                     {/* Barre représentant les calories */}
@@ -97,7 +107,6 @@ export default function DailyActivityChart({ sessions }) {
                         fill="#E60000"
                         barSize={8}
                         radius={[3, 3, 0, 0]}
-                        stroke="none"
                     />
                 </BarChart>
             </ResponsiveContainer>

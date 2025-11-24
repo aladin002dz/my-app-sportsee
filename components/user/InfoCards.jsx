@@ -4,16 +4,16 @@
 function InfoCard({ icon, label, value, unit, bgIcon }) {
     return (
         // Conteneur principal de la carte
-        <div className="flex items-center bg-gray-50 rounded-2xl p-4 w-64 h-24 shadow-sm">
+        <div className="flex items-center bg-gray-50 p-8 w-64 h-30 shadow-sm">
             <div className={`flex items-center justify-center rounded-lg w-12 h-12 mr-4 ${bgIcon}`}>
                 {icon}
             </div>
-            <div className="flex flex-col">
-                <p className="text-lg font-bold">
+            <div className="flex flex-col  font-bold">
+                <p className="text-lg">
                     {value}
-                    {unit && <span className="text-sm font-normal ml-1">{unit}</span>}
+                    {unit && <span className="text-m ml-1">{unit}</span>}
                 </p>
-                <p className="text-xs text-gray-500">{label}</p>
+                <p className="text-sm text-gray-500 font-semibold">{label}</p>
             </div>
         </div>
     );
@@ -47,7 +47,7 @@ export default function InfoCards({ keyData }) {
 
     return (
         // Conteneur principal affichant les cartes en colonne avec espacement
-        <div className="flex flex-col gap-4 w-64">
+        <div className="flex flex-col gap-12 ml-8">
             <InfoCard
                 label="Calories"
                 value={calorieCount}
