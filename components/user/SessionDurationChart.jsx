@@ -24,28 +24,14 @@ export default function SessionDurationChart({ sessions }) {
         { day: "", sessionLength: data[data.length - 1]?.sessionLength ?? 0 }, // point final fictif
     ];
 
-    /**
-    * Tooltip minimaliste affichant la durée en minutes
-    */
-    function CustomTooltip({ active, payload }) {
-        if (active && payload && payload.length) {
-            return (
-                <div className="bg-white text-black text-xs px-2 py-1 rounded shadow-md">
-                    <p>{payload[0].value} min</p>
-                </div>
-            );
-        }
-        return null;// Ne rien afficher si inactive
-    }
-
     // Labels des jours de la semaine en français (abréviations)
     const dayLabels = ["L", "M", "M", "J", "V", "S", "D"];
 
     /**
- * Formate le jour pour l'axe X en utilisant les abréviations
- * @param day - valeur du jour dans les données
- * @returns abréviation du jour
- */
+* Formate le jour pour l'axe X en utilisant les abréviations
+* @param day - valeur du jour dans les données
+* @returns abréviation du jour
+*/
     function formatDay(day) {
         if (!day) return ""; // points fictifs
         let n;
@@ -61,17 +47,37 @@ export default function SessionDurationChart({ sessions }) {
         return dayLabels[n - 1] ?? "";
     }
 
+    /**
+    * Tooltip minimaliste affichant la durée en minutes
+    */
+    function CustomTooltip({ active, payload }) {
+        if (active && payload && payload.length) {
+            return (
+                <div className="bg-white text-black text-xs px-2 py-1 rounded shadow-md">
+                    <p>{payload[0].value} min</p>
+                </div>
+            );
+        }
+        return null;// Ne rien afficher si inactive
+    }
+
     return (
         // Conteneur principal avec fond rouge semi-transparent et coins arrondis
-        <div className="bg-[#FF0000] bg-opacity-80 rounded-2xl w-[250px] h-[250px] relative">
+        <div className="bg-[#FF0000] bg-opacity-80 rounded-2xl w-[270px] h-[270px] relative">
             <h2 className="text-gray-300 text-xs mb-4 mt-5 ml-4 w-[120px]">Durée moyenne des sessions</h2>
 
             {/* Conteneur responsive pour que le graphique s'adapte */}
-            <ResponsiveContainer width="100%" height="80%">
+            <ResponsiveContainer width="100%" height="60%">
                 <LineChart
                     data={extendedData}
-                    margin={{ top: 20, right: 0, left: 0, bottom: 30 }}
+                    margin={{ top: 0, right: -20, left: -20, bottom: 0 }} // Dépassement des bords
                 >
+                    <defs>
+                        <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="rgba(255,255,255,0.4)" />
+                            <stop offset="100%" stopColor="rgba(255,255,255,1)" />
+                        </linearGradient>
+                    </defs>
 
                     {/* Axe X (jours) */}
                     <XAxis
@@ -81,25 +87,32 @@ export default function SessionDurationChart({ sessions }) {
                         tickFormatter={formatDay}
                         tickLine={false}
                         axisLine={false}
-                        tick={{ fill: "#fff", fontSize: 12 }}
+                        tick={{ fill: "#fff", fontSize: 11 }}
                         tickMargin={10}
                         interval={0}
+                        padding={{ left: 0, right: 0 }}
                     />
 
                     {/* Axe Y caché (durée des sessions) */}
                     <YAxis dataKey="sessionLength" hide />
 
                     {/* Tooltip personnalisé */}
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip content={<CustomTooltip />}
+                        cursor={{ fill: "rgba(0,0,0,0.1)" }}/>
 
                     {/* Ligne représentant la durée moyenne */}
                     <Line
                         type="monotone"
                         dataKey="sessionLength"
-                        stroke="#fff"
+                        stroke="url(#lineGradient)"
                         strokeWidth={2}
                         dot={false}
-                        activeDot={{ r: 4 }}
+                        activeDot={{
+                            r: 5,
+                            stroke: "rgba(255,255,255,0.3)",
+                            strokeWidth: 5,
+                            fill: "#fff",
+                        }}
                     />
                 </LineChart>
             </ResponsiveContainer>

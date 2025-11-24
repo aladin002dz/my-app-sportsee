@@ -29,28 +29,30 @@ export default function ScoreChart({ score }) {
 
     return (
         // Conteneur principal du graphique avec style Tailwind
-        <div className="bg-gray-50 rounded-2xl w-[250px] h-[250px] aspect-square mx-auto relative p-4">
+        <div className="bg-gray-50 rounded-2xl w-[270px] h-[270px] aspect-square mx-auto relative p-4">
             <h2 className="text-sm font-medium mb-2">Score</h2>
 
             {/* Conteneur responsive qui ajuste le graphique à la taille du parent */}
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="75%">
                 <RadialBarChart
+                    cx="50%"
+                    cy="50%"
                     innerRadius="80%"       // rayon intérieur proportionnel
                     outerRadius="110%"      // rayon externe = taille du conteneur
                     data={data}
                     startAngle={90}         // commence en haut
-                    endAngle={280}         // sens horaire
+                    endAngle={280}       
                 >
                     {/* Axe polaire pour les valeurs, ici invisible (tick=false) */}
                     <PolarAngleAxis
                         type="number"
                         domain={[0, 100]}
-                        dataKey="value"
                         tick={false}
                     />
 
                     {/* Fond de l’anneau (barre grise derrière le score) */}
                     <RadialBar
+                        background
                         data={[{ value: 100 }]}
                         dataKey="value"
                         cornerRadius="50%"
@@ -68,13 +70,14 @@ export default function ScoreChart({ score }) {
 
             {/* Disque blanc central */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="bg-white rounded-full w-1/2 h-1/2 flex flex-col items-center justify-center">
+                <div className="bg-white rounded-full w-[50%] h-[50%] flex flex-col items-center justify-center">
                     <p className="text-2xl font-bold">{normalizedScore}%</p>
                     <p className="text-xs md:text-sm text-gray-500 mt-1 font-semibold">
                         de votre<br />objectif
                     </p>
                 </div>
             </div>
+
         </div>
     );
 }
