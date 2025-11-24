@@ -48,7 +48,6 @@ export default function DailyActivityChart({ sessions }) {
                 <Legend
                     verticalAlign="top"
                     align="right"
-                    wrapperStyle={{ top: -10 }}
                     payload={[
                         { value: "Poids (kg)", type: "circle", color: "#282D30" },
                         { value: "Calories brûlées (kCal)", type: "circle", color: "#E60000" },
