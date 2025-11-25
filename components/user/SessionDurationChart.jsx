@@ -1,6 +1,25 @@
 "use client";
 
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, } from "recharts";
+
+function RightSideCursor(props) {
+    const { points, width, height} = props;
+    if (!points || !points[0]) return null;
+
+    const x = points[0].x;
+
+    return (
+        <g>
+            <rect
+                x={x}
+                y={0}            // on part du y réel de la zone du chart
+                width={width - x}
+                height={height}   // et on utilise la height de cette zone
+                fill="rgba(0,0,0,0.25)"
+            />
+        </g>
+    );
+}
 
 /**
  * Composant affichant la durée moyenne des sessions de l'utilisateur.
@@ -14,6 +33,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "rec
  * <SessionDurationChart sessions={sessions} />
  */
 export default function SessionDurationChart({ sessions }) {
+
     // Assure que sessions est un tableau
     const data = Array.isArray(sessions) ? sessions : [];
 
@@ -62,60 +82,68 @@ export default function SessionDurationChart({ sessions }) {
     }
 
     return (
-        // Conteneur principal avec fond rouge semi-transparent et coins arrondis
-        <div className="bg-[#FF0000] bg-opacity-80 rounded-2xl w-[270px] h-[270px] relative">
-            <h2 className="text-gray-300 text-xs mb-4 mt-5 ml-4 w-[120px]">Durée moyenne des sessions</h2>
+        <div className="bg-[#FF0000] bg-opacity-80 rounded-2xl w-[270px] h-[270px] relative overflow-hidden">
+            <h2 className="text-gray-200 text-xs mb-4 mt-5 ml-4 w-[120px]">Durée moyenne des sessions</h2>
 
-            {/* Conteneur responsive pour que le graphique s'adapte */}
-            <ResponsiveContainer width="100%" height="60%">
-                <LineChart
-                    data={extendedData}
-                    margin={{ top: 0, right: -20, left: -20, bottom: 0 }} // Dépassement des bords
-                >
-                    <defs>
-                        <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
-                            <stop offset="0%" stopColor="rgba(255,255,255,0.4)" />
-                            <stop offset="100%" stopColor="rgba(255,255,255,1)" />
-                        </linearGradient>
-                    </defs>
+            <div className="w-full h-[180px] mt-2">
+                {/* Conteneur responsive pour que le graphique s'adapte */}
+                <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                        data={extendedData}
+                        margin={{ top: 0, right: -20, left: -20, bottom: 0 }} // Dépassement des bords
+                    >
+                        <defs>
+                            {/* dégradé de la ligne */}
+                            <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stopColor="rgba(255,255,255,0.4)" />
+                                <stop offset="100%" stopColor="rgba(255,255,255,1)" />
+                            </linearGradient>
 
-                    {/* Axe X (jours) */}
-                    <XAxis
-                        dataKey="day"
-                        type="category"
-                        scale="point"
-                        tickFormatter={formatDay}
-                        tickLine={false}
-                        axisLine={false}
-                        tick={{ fill: "#fff", fontSize: 11 }}
-                        tickMargin={10}
-                        interval={0}
-                        padding={{ left: 0, right: 0 }}
-                    />
+                            {/* dégradé de la zone sous la courbe (optionnel) */}
+                            <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="rgba(255,255,255,0.4)" />
+                                <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+                            </linearGradient>
+                        </defs>
 
-                    {/* Axe Y caché (durée des sessions) */}
-                    <YAxis dataKey="sessionLength" hide />
+                        {/* Axe X (jours) */}
+                        <XAxis
+                            dataKey="day"
+                            type="category"
+                            scale="point"
+                            tickFormatter={formatDay}
+                            tickLine={false}
+                            axisLine={false}
+                            tick={{ fill: "#fff", fontSize: 11 }}
+                            interval={0}
+                            padding={{ left: 0, right: 0 }}
+                        />
 
-                    {/* Tooltip personnalisé */}
-                    <Tooltip content={<CustomTooltip />}
-                        cursor={{ fill: "rgba(0,0,0,0.1)" }}/>
+                        {/* Axe Y caché (durée des sessions) */}
+                        <YAxis dataKey="sessionLength" hide />
 
-                    {/* Ligne représentant la durée moyenne */}
-                    <Line
-                        type="monotone"
-                        dataKey="sessionLength"
-                        stroke="url(#lineGradient)"
-                        strokeWidth={2}
-                        dot={false}
-                        activeDot={{
-                            r: 5,
-                            stroke: "rgba(255,255,255,0.3)",
-                            strokeWidth: 5,
-                            fill: "#fff",
-                        }}
-                    />
-                </LineChart>
-            </ResponsiveContainer>
+                        {/* Tooltip personnalisé */}
+                        <Tooltip content={<CustomTooltip />}
+                            cursor={<RightSideCursor />} />
+
+                        {/* Ligne représentant la durée moyenne */}
+                        <Line
+                            type="monotone"
+                            dataKey="sessionLength"
+                            stroke="url(#lineGradient)"
+                            strokeWidth={2}
+                            dot={false}
+                            activeDot={{
+                                r: 5,
+                                stroke: "rgba(255,255,255,0.3)",
+                                strokeWidth: 5,
+                                fill: "#fff",
+                            }}
+                        />
+                    </LineChart>
+                </ResponsiveContainer>
+            </div>
+
         </div>
     );
 }
