@@ -15,24 +15,24 @@ export default function Sidebar() {
     return (
         <aside className="w-20 h-250 flex flex-col content-center items-center bg-black">
             <nav className="flex flex-col gap-6 pt-70">
-                <button className="bg-white cursor-pointer rounded-md p-3" id="sidebar__icon">
-                    <GrYoga className="size-8" />
+                <button className="bg-white cursor-pointer rounded-md p-3">
+                    <GrYoga className="size-8 stroke-red-600" />
                 </button>
 
-                <button className="bg-white cursor-pointer rounded-md p-3" id="sidebar__icon">
-                    <BiSwim className="size-8" />
+                <button className="bg-white cursor-pointer rounded-md p-3">
+                    <BiSwim className="size-8 fill-red-600" />
                 </button>
 
-                <button className="bg-white cursor-pointer rounded-md p-3" id="sidebar__icon">
-                    <MdOutlineDirectionsBike className="size-8" />
+                <button className="bg-white cursor-pointer rounded-md p-3">
+                    <MdOutlineDirectionsBike className="size-8 fill-red-600" />
                 </button>
 
-                <button className="bg-white cursor-pointer rounded-md p-3" id="sidebar__icon">
-                    <LuDumbbell className="size-8" />
+                <button className="bg-white cursor-pointer rounded-md p-3">
+                    <LuDumbbell className="size-8 fill-red-600 stroke-red-600" />
                 </button>
 
             </nav>
-            <p className="block text-white rotate-180 mt-50 text-sm" id="sidebar__text">Copiryght, SportSee 2025</p>
+            <p className=" text-white rotate-270 mt-60 text-xs w-[180px]" >Copiryght, SportSee 2025</p>
         </aside>
     );
 }

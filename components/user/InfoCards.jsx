@@ -1,5 +1,9 @@
 "use client";
 
+import { ImFire } from "react-icons/im";
+import { FaDrumstickBite } from "react-icons/fa";
+import { FaAppleWhole, FaBurger } from "react-icons/fa6";
+
 // Composant pour une seule carte d'information
 function InfoCard({ icon, label, value, unit, bgIcon }) {
     return (
@@ -46,35 +50,34 @@ export default function InfoCards({ keyData }) {
     } = keyData;
 
     return (
-        // Conteneur principal affichant les cartes en colonne avec espacement
         <div className="flex flex-col gap-12 ml-8">
             <InfoCard
                 label="Calories"
                 value={calorieCount}
                 unit="kCal"
                 bgIcon="bg-red-100"
-                icon={<span>🔥</span>}
+                icon={<ImFire className="fill-red-600" />}
             />
             <InfoCard
-                label="Proteines"
+                label="Protéines"
                 value={proteinCount}
                 unit="g"
                 bgIcon="bg-blue-100"
-                icon={<span>🍗</span>}
+                icon={<FaDrumstickBite className="fill-blue-600"/>}
             />
             <InfoCard
                 label="Glucides"
                 value={carbohydrateCount}
                 unit="g"
                 bgIcon="bg-yellow-100"
-                icon={<span>🍞</span>}
+                icon={<FaAppleWhole className="fill-yellow-600" />}
             />
             <InfoCard
                 label="Lipides"
                 value={lipidCount}
                 unit="g"
                 bgIcon="bg-pink-100"
-                icon={<span>🧈</span>}
+                icon={<FaBurger className="fill-pink-600" />}
             />
         </div>
     );

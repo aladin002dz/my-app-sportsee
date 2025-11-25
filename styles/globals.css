@@ -9,25 +9,7 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-#sidebar__icon {
-    color: #ff0101;
-}
-
-#sidebar__text {
-    writing-mode: vertical-lr;
-    text-align: center;
-}
-
-
 /* activityChart.module.css */
-.activityList li {
-    list-style: disc;
-    /* ou circle, square */
-    margin-bottom: 8px;
-    color: #000;
-    /* couleur du texte */
-}
-
 .activityList li:nth-child(1)::marker {
     color: #282D30;
     /* couleur de la puce pour le premier élément */
@@ -38,17 +20,4 @@ body {
     color: #E60000;
     /* couleur de la puce pour le deuxième élément */
     font-size: 25px;
-}
-
-
-.session-chart-container {
-    background: #ff0000;
-    color: #ffff;
-    font-size: 12px;
-    /* juste pour le voir bien */
-    border-radius: 10px;
-    padding: 1rem;
-    margin-top: 30px;
-    width: 258px;
-    /* pour tester */
 }
